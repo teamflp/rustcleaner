@@ -362,6 +362,7 @@ pub fn secure_clean_files(files_to_clean: Vec<PathBuf>) {
     }
 }
 
+// Tests Unitaires
 #[cfg(test)]
 mod tests {
     use super::*;

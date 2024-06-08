@@ -1,164 +1,110 @@
-# RUST CLEANER
+# Cleaner Tool Documentation
 
-`RUST CLEANER` est un outil CLI (interface en ligne de commande) écrit en Rust, conçu pour scanner, nettoyer et vider les fichiers inutiles sur votre système. Il prend en charge macOS, Linux et Windows, et offre des fonctionnalités pour gérer les dossiers de téléchargements et la poubelle.
+## Overview
 
-## Fonctionnalités
+The Cleaner Tool is a command-line application designed to scan, clean, and manage unnecessary files on your system. It supports multiple features including scanning directories, cleaning files, clearing the Downloads folder and Trash, generating reports, scheduling automatic cleanups, and more. The tool is bilingual, supporting both English and French languages.
 
-- **Scan des fichiers inutiles** : Scanne les répertoires spécifiés pour identifier les fichiers temporaires, journaux, anciens fichiers et fichiers de sauvegarde.
-- **Nettoyage des fichiers inutiles** : Supprime les fichiers inutiles identifiés lors du scan.
-- **Vider le dossier Téléchargements** : Supprime tous les fichiers du dossier Téléchargements.
-- **Vider la poubelle** : Supprime tous les fichiers de la poubelle.
-- **Barre de progression stylisée** : Affiche une barre de progression avec des pourcentages et des couleurs pour un suivi visuel des opérations.
-- **Rapport de nettoyage** : Génère un rapport après chaque opération de nettoyage.
-- **Planificateur de nettoyage** : Permet de planifier des nettoyages automatiques.
-- **Analyse des fichiers en double** : Scanne le système pour les fichiers en double.
-- **Exclusion de types de fichiers** : Permet d'exclure certains types de fichiers du nettoyage.
-- **Support pour les répertoires personnalisés** : Permet de spécifier des répertoires supplémentaires ou spécifiques à nettoyer.
-- **Mode interactif** : Offre un mode interactif pour la suppression des fichiers.
-- **Nettoyage des applications spécifiques** : Nettoie les fichiers de cache des applications spécifiques.
-- **Restauration des fichiers supprimés** : Déplace les fichiers supprimés dans une corbeille spécifique avant de les supprimer définitivement, avec la possibilité de les restaurer.
-- **Nettoyage sécurisé** : Supprime les fichiers de manière sécurisée.
-- **Nettoyage basé sur l'âge des fichiers** : Supprime des fichiers en fonction de leur âge.
 
-## Prérequis
+## Prerequisites
 
-Assurez-vous que vous avez [Rust](https://www.rust-lang.org/tools/install) installé sur votre machine.
+Ensure that you have [Rust](https://www.rust-lang.org/tools/install) installed on your machine.
+
+## Features
+### 1. Scan Directories for Unnecessary Files
+Scans the specified directories for files with extensions such as .tmp, .log, .old, .bak.
+
+### 2. Clean Unnecessary Files
+
+Scans and cleans the specified directories of unnecessary files. Prompts the user before deletion.
+
+### 3. Clear the Downloads Folder
+
+Clears all files in the Downloads folder.
+
+### 4. Clear the Trash
+
+Empties the system's Trash directory.
+
+### 5. Generate a Report After Cleaning
+
+Generates a report summarizing the cleaning operation, including the total number of files cleaned and the total size.
+
+### 6. Schedule an Automatic Cleaning (Every x Hours)
+
+Allows you to schedule an automatic cleaning job at regular intervals (e.g., every hour, every 2 hours).
+
+### 7. Analyze and Remove Duplicate Files
 
 ## Installation
 
-Clonez le dépôt et compilez le projet avec Cargo :
+To install the Cleaner Tool, ensure you have Rust installed on your system. Clone the repository and build the project using Cargo:
 
 ```sh
-git clone <URL_DU_DÉPÔT>
-cd <NOM_DU_RÉPÔT>
-cargo 
+git clone https://github.com/teamflp/rustcleaner.git
+cd rustcleaner
+cargo build --release
 ```
 
-## Utilisation
-### Scanner les fichiers inutiles
-
-Cette commande scanne les répertoires spécifiés pour les fichiers inutiles et affiche les résultats.
+## Usage
+### Run the Cleaner Tool using the following command:
 
 ```sh
-cargo run -- --scan
+cargo run
 ```
 
-### Nettoyer les fichiers inutiles
-Cette commande scanne et supprime les fichiers inutiles des répertoires spécifiés après confirmation de l'utilisateur.
+### Upon launching, the tool will prompt you to select a language:
 
 ```sh
-cargo run -- --clean
+Choose a language:
+Choose your language / Choisissez votre langue:
+> English
+  Français
 ```
 
-### Vider le dossier Téléchargements
-Cette commande supprime tous les fichiers du dossier Téléchargements après confirmation de l'utilisateur.
+Select the desired language to proceed.
+
+## Main Menu
+After selecting the language, you will be presented with the main menu:
 
 ```sh
-cargo run -- --clear-downloads
+Choose an action:
+  1 => Scan directories for unnecessary files
+  2 => Clean unnecessary files
+  3 => Clear the Downloads folder
+  4 => Clear the Trash
+  5 => Generate a report after cleaning
+> 6 => Schedule an automatic cleaning (every x hours)
+  7 => Analyze and remove duplicate files
+  8 => Interactive mode for file deletion
+  9 => Clean browser cache files
+  10 => Restore deleted files
+  11 => Secure file cleaning
+  12 => Clean files older than a specified number of days
+  q => Enter q to quit
 ```
 
-### Vider la poubelle
-Cette commande supprime tous les fichiers de la poubelle après confirmation de l'utilisateur.
+### Select the scheduling option from the main menu:
 
 ```sh
-cargo run -- --clear-trash
+6 => Schedule an automatic cleaning (every x hours)
 ```
-### Générer un rapport de nettoyage
-Cette commande génère un rapport détaillé après l'opération de nettoyage.
-
-La commande `--report` doit être utilisée en conjonction avec les commandes qui génèrent un rapport, comme `--scan` ou `--clean`.
-
-`cargo run -- --report` affichera un message d'erreur si utilisé seul. Utilisez `cargo run -- --scan --report` ou `cargo run -- --clean --report`
-```sh
-cargo run -- --scan --report 
-```
-ou
+Choose the interval:
 
 ```sh
-cargo run -- --clean --report
+> 1 hour
+  2 hours
+  3 hours
+  4 hours
+  5 hours
+  6 hours
+  12 hours
 ```
-### Planifier un nettoyage automatique
-Les commandes `cargo run -- --schedule daily` ou `cargo run -- --schedule weekly` permettent de planifier des nettoyages automatiques à des intervalles réguliers.
-
-utiliser cargo run -- --schedule daily ou cargo run -- --schedule weekly pour planifier des nettoyages automatiques. Le programme restera en cours d'exécution pour exécuter les tâches planifiées aux moments spécifiés.
-
+The application will now run indefinitely, performing the scheduled cleaning job at the selected interval.
 ```sh
-cargo run -- --schedule daily
+Select the interval for automatic cleaning: 1 hour
+
+Scheduled job set. The application will now run indefinitely.
 ```
-Exemple d'utilisation :  
-
-- `daily`: Si vous souhaitez que le nettoyage automatique se fasse quotidiennement à minuit.
-```sh
-Enter the schedule (daily, weekly): daily
-```
-
-- `weekly`: Si vous préférez que le nettoyage automatique se fasse chaque semaine, le dimanche à minuit.
-```sh
-Enter the schedule (daily, weekly): weekly
-```
-
-```sh
-cargo run -- --schedule weekly
-```
-
-### Analyser les fichiers en double
-Cette commande scanne le système pour les fichiers en double et offre une option pour les supprimer.
-
-```sh
-cargo run -- --duplicates
-```
-
-### Exclure des types de fichiers du nettoyage
-Cette commande permet d'exclure certains types de fichiers du nettoyage.
-
-```sh
-cargo run -- --exclude-type log tmp
-```
-
-### Nettoyer des répertoires personnalisés
-Cette commande permet de spécifier des répertoires supplémentaires ou spécifiques à nettoyer.
-
-```sh
-cargo run -- --dir /path/to/custom/dir
-```
-
-### Utiliser le mode interactif
-Cette commande offre un mode interactif pour la suppression des fichiers.
-
-```sh
-cargo run -- --interactive
-```
-
-### Nettoyer les fichiers de cache des applications spécifiques
-Cette commande nettoie les fichiers de cache des applications spécifiques.
-
-```sh
-cargo run -- --clean-browser
-```
-
-### Restaurer des fichiers supprimés
-Cette commande déplace les fichiers supprimés dans une corbeille spécifique avant de les supprimer définitivement, avec la possibilité de les restaurer.
-
-```sh
-cargo run -- --restore
-```
-
-### Nettoyer des fichiers de manière sécurisée
-Cette commande supprime les fichiers de manière sécurisée, en écrasant les données.
-
-```sh
-cargo run -- --secure-clean
-```
-
-### Nettoyer des fichiers en fonction de leur âge
-Cette commande supprime des fichiers qui n'ont pas été modifiés depuis une certaine période.
-
-```sh
-cargo run -- --age 30
-```
-
-
-
 
 
 
